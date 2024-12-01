@@ -3,9 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { SettingsSection } from '../components/settings/SettingsSection';
 import { settingsSections } from '../config/settings';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 const Settings = () => {
   const navigate = useNavigate();
+  
+  // Add page title hook
+  usePageTitle('Settings');
 
   return (
     <div className="min-h-screen bg-[#1e1e1e] text-gray-300 p-8">

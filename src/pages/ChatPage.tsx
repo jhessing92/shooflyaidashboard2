@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import ChatMessage from '../components/chat/ChatMessage';
 import ChatInput from '../components/chat/ChatInput';
 import FloatingOrb from '../components/chat/FloatingOrb';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -23,6 +24,9 @@ const ChatPage = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const [primaryOrbPosition, setPrimaryOrbPosition] = useState({ x: 25, y: 25 });
+
+  // Add page title hook
+  usePageTitle('Chat');
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -56,12 +60,10 @@ const ChatPage = () => {
 
   return (
     <div className="relative min-h-screen bg-black overflow-hidden">
-      {/* Background gradient orbs */}
       <FloatingOrb color="blue" initialPosition={primaryOrbPosition} />
       <FloatingOrb color="green" initialPosition={{ x: 75, y: 75 }} mirrorOf={primaryOrbPosition} />
 
       <div className="relative flex flex-col h-screen backdrop-blur-xl">
-        {/* Header */}
         <div className="flex items-center justify-between p-4 bg-black/20 backdrop-blur-lg border-b border-white/10">
           <div className="flex items-center">
             <button
@@ -80,7 +82,6 @@ const ChatPage = () => {
           </button>
         </div>
 
-        {/* Chat messages container */}
         <div className="flex-1 overflow-y-auto px-4 py-6">
           <div className="max-w-3xl mx-auto space-y-6">
             {messages.map((message, index) => (
@@ -90,7 +91,6 @@ const ChatPage = () => {
           </div>
         </div>
 
-        {/* Chat input */}
         <div className="border-t border-white/10 bg-black/20 backdrop-blur-lg p-4">
           <div className="max-w-3xl mx-auto">
             <ChatInput onSend={handleSendMessage} isLoading={isLoading} />

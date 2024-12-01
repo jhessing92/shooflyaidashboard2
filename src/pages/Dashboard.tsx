@@ -9,6 +9,7 @@ import { MakeScenariosList } from '../components/dashboard/MakeScenariosList';
 import { DealCard } from '../components/dashboard/DealCard';
 import DashboardHeader from '../components/dashboard/DashboardHeader';
 import { fetchPipedriveDeals, type PipedriveDeal } from '../utils/pipedrive';
+import { usePageTitle } from '../hooks/usePageTitle';
 import toast from 'react-hot-toast';
 
 const Dashboard = () => {
@@ -17,6 +18,9 @@ const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useAuth();
   const navigate = useNavigate();
+
+  // Add page title hook
+  usePageTitle();
 
   useEffect(() => {
     const loadDeals = async () => {
@@ -64,7 +68,6 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Rest of the dashboard content */}
           {isLoading ? (
             <div className="w-full p-4 text-center text-gray-400">
               Loading deals...
